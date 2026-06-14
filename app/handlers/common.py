@@ -1,24 +1,25 @@
-from lib2to3.fixer_util import Comma
-
 from telegram import Update
-from telegram.ext import ContextTypes, CommandHandler
+from telegram.ext import ContextTypes, CommandHandler, MessageHandler, filters
 
+from app.keyboards.reply import HELP_BUTTON
 from app.services.common_service import create_user
+from app.keyboards import reply, inline
 
-def get_handlers():
+
+def get_handlers() -> list:
     return [
         CommandHandler("start", start),
-        CommandHandler("help", help)
+        CommandHandler("help", help),
+        MessageHandler(filters.Text(HELP_BUTTON), help)
     ]
 
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     telegram_user, chat = update.effective_user, update.effective_chat
     create_user(telegram_user.id, chat.id, telegram_user.username)
-    await update.message.reply_text("Вы зарегистрированы!")
+    await update.effective_message.reply_text("Вы зарегистрированы!",
+                                              reply_markup=reply.get_main_keyboard())
+
 
 async def help(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    await update.message.reply_text("Бот помогает с напоминаниями о днях рождения")
-
-async def cancel():
-    pass
+    await update.effective_message.reply_text("Бот помогает с напоминаниями о днях рождения")

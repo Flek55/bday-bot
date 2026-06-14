@@ -11,7 +11,6 @@ CANCEL_BUTTON = "Отмена"
 def get_main_keyboard() -> ReplyKeyboardMarkup:
     keyboard = [
         [
-            KeyboardButton(PEOPLE_BUTTON),
             KeyboardButton(BIRTHDAYS_BUTTON)
         ],
         [
