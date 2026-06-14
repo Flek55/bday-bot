@@ -16,7 +16,7 @@ def get_handlers() -> list:
 
 
 async def settings(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    await update.message.reply_text("Настройки", reply_markup=get_settings_keyboard())
+    await update.effective_message.reply_text("Настройки", reply_markup=get_settings_keyboard())
 
 
 async def time(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -35,4 +35,4 @@ async def toggle_notifications(update: Update, context: ContextTypes.DEFAULT_TYP
 
 
 async def back(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    await update.message.reply_text("Главное меню", reply_markup=get_main_keyboard())
+    await update.effective_message.reply_text("Главное меню", reply_markup=get_main_keyboard())
