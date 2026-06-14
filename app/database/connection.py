@@ -4,6 +4,15 @@ from contextlib import contextmanager
 from pathlib import Path
 
 DB_PATH = Path(__file__).resolve().parents[2] / "data" / "birthdays.db"
+SCHEMA_PATH = Path(__file__).with_name("schema.sql")
+
+
+def initialize_database() -> None:
+    DB_PATH.parent.mkdir(parents=True, exist_ok=True)
+    schema = SCHEMA_PATH.read_text(encoding="utf-8")
+
+    with get_connection() as connection:
+        connection.executescript(schema)
 
 
 @contextmanager

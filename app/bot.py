@@ -1,19 +1,28 @@
 from os import getenv
 
 from dotenv import load_dotenv
-from telegram import Update
-from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
+from telegram.ext import ApplicationBuilder
 
-from app.handlers.common import start
-
-load_dotenv()
-bot_token = getenv("BOT_TOKEN")
-
-if bot_token is None:
-    raise RuntimeError("BOT_TOKEN is not set")
-
-app = ApplicationBuilder().token(bot_token).build()
-app.add_handler(CommandHandler("start", start))
+from app.database.connection import initialize_database
+from app.handlers import birthdays, common, people
 
 
-app.run_polling()
+def main() -> None:
+    load_dotenv()
+    initialize_database()
+
+    bot_token = getenv("BOT_TOKEN")
+
+    if bot_token is None:
+        raise RuntimeError("BOT_TOKEN is not set")
+
+    app = ApplicationBuilder().token(bot_token).build()
+    # common handlers
+    for handler in common.get_handlers():
+        app.add_handler(handler)
+
+    app.run_polling()
+
+
+if __name__ == "__main__":
+    main()
