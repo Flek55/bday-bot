@@ -50,3 +50,8 @@ def get_settings_keyboard() -> ReplyKeyboardMarkup:
         ]
     ]
     return ReplyKeyboardMarkup(keyboard, resize_keyboard=True, is_persistent=True)
+
+
+def get_cancel_keyboard() -> ReplyKeyboardMarkup:
+    keyboard = [[KeyboardButton(CANCEL_BUTTON)]]
+    return ReplyKeyboardMarkup(keyboard, resize_keyboard=True, is_persistent=True)
