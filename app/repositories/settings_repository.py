@@ -25,3 +25,17 @@ def update_user_active_status(
                      "SET is_active = ? "
                      "WHERE telegram_user_id = ?",
                      (status, telegram_user_id))
+
+
+def get_user_notification_time(
+        telegram_user_id: int
+) -> str | None:
+    with get_connection() as conn:
+        row = conn.execute("SELECT notification_time "
+                           "FROM users "
+                           "WHERE telegram_user_id = ?",
+                           (telegram_user_id,)).fetchone()
+        if row is None:
+            return None
+
+        return row["notification_time"]

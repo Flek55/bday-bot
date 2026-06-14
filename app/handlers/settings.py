@@ -1,7 +1,7 @@
 from telegram import Update
 from telegram.ext import ContextTypes, MessageHandler, filters
 
-from app.services.settings_service import toggle_user_notification_status
+from app.services.settings_service import toggle_user_notification_status, get_user_send_time
 from app.keyboards.reply import get_settings_keyboard, SETTINGS_BUTTON, TOGGLE_NOTIFICATIONS_BUTTON, \
     CHANGE_SEND_TIME_BUTTON, get_main_keyboard, BACK_BUTTON, get_cancel_keyboard, CANCEL_BUTTON
 
@@ -22,8 +22,9 @@ async def settings(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 
 
 async def time(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    await update.effective_message.reply_text(f"Текущее время отправки сообщений: {1}\n"
-                                              f"Чтобы изменить напишите время в формате HH:MM",
+    notification_time = get_user_send_time(update.effective_user.id)
+    await update.effective_message.reply_text(f"Текущее время отправки сообщений: {notification_time}\n"
+                                              f"Чтобы изменить напишите время в формате ЧЧ:MM",
                                               reply_markup=get_cancel_keyboard())
 
 
