@@ -39,3 +39,15 @@ def get_user_notification_time(
             return None
 
         return row["notification_time"]
+
+
+def update_user_notification_time(
+        telegram_user_id: int,
+        time: str
+) -> bool:
+    with get_connection() as conn:
+        cursor = conn.execute("UPDATE users "
+                              "SET notification_time = ? "
+                              "WHERE telegram_user_id = ?",
+                              (time, telegram_user_id))
+        return cursor.rowcount > 0
