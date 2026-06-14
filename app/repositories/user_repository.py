@@ -1,5 +1,3 @@
-import sqlite3
-
 from app.database.connection import get_connection
 
 
@@ -18,7 +16,7 @@ def create_or_update_user(
                             "ON CONFLICT(telegram_user_id) DO UPDATE SET"
                             "  notification_chat_id = excluded.notification_chat_id,"
                             "  username = excluded.username",
-                            (telegram_user_id, notification_chat_id, username)).lastrowid
+                            (telegram_user_id, notification_chat_id, username))
 
 
 def toggle_user_status(

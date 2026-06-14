@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 from telegram.ext import ApplicationBuilder
 
 from app.database.connection import initialize_database
-from app.handlers import birthdays, common, people
+from app.handlers import birthdays, common, people, settings
 
 
 def main() -> None:
@@ -19,6 +19,9 @@ def main() -> None:
     app = ApplicationBuilder().token(bot_token).build()
     # common handlers
     for handler in common.get_handlers():
+        app.add_handler(handler)
+    # settings
+    for handler in settings.get_handlers():
         app.add_handler(handler)
 
     app.run_polling()

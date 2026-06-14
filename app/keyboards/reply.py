@@ -1,11 +1,16 @@
 from telegram import ReplyKeyboardMarkup, KeyboardButton
 
-PEOPLE_BUTTON = "Люди"
 BIRTHDAYS_BUTTON = "Дни рождения"
 SETTINGS_BUTTON = "Настройки"
 HELP_BUTTON = "Помощь"
 BACK_BUTTON = "Назад"
 CANCEL_BUTTON = "Отмена"
+
+LIST_BIRTHDAYS_BUTTON = "Просмотреть дни рождения"
+ADD_BIRTHDAY_BUTTON = "Добавить день рождения"
+
+CHANGE_SEND_TIME_BUTTON = "Изменить время отправки"
+TOGGLE_NOTIFICATIONS_BUTTON = "Вкл/Выкл уведомления"
 
 
 def get_main_keyboard() -> ReplyKeyboardMarkup:
@@ -24,19 +29,8 @@ def get_main_keyboard() -> ReplyKeyboardMarkup:
 def get_people_keyboard() -> ReplyKeyboardMarkup:
     keyboard = [
         [
-            KeyboardButton()
-        ],
-        [
-            KeyboardButton(BACK_BUTTON)
-        ]
-    ]
-    return ReplyKeyboardMarkup(keyboard, resize_keyboard=True, is_persistent=True)
-
-
-def get_birthdays_keyboard() -> ReplyKeyboardMarkup:
-    keyboard = [
-        [
-            KeyboardButton()
+            KeyboardButton(ADD_BIRTHDAY_BUTTON),
+            KeyboardButton(LIST_BIRTHDAYS_BUTTON)
         ],
         [
             KeyboardButton(BACK_BUTTON)
@@ -48,7 +42,8 @@ def get_birthdays_keyboard() -> ReplyKeyboardMarkup:
 def get_settings_keyboard() -> ReplyKeyboardMarkup:
     keyboard = [
         [
-            KeyboardButton()
+            KeyboardButton(CHANGE_SEND_TIME_BUTTON),
+            KeyboardButton(TOGGLE_NOTIFICATIONS_BUTTON)
         ],
         [
             KeyboardButton(BACK_BUTTON)
