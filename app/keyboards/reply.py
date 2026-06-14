@@ -4,6 +4,7 @@ BIRTHDAYS_BUTTON = "Дни рождения"
 SETTINGS_BUTTON = "Настройки"
 HELP_BUTTON = "Помощь"
 BACK_BUTTON = "Назад"
+MAIN_MENU_BUTTON = "В главное меню"
 CANCEL_BUTTON = "Отмена"
 
 LIST_BIRTHDAYS_BUTTON = "Просмотреть дни рождения"
@@ -33,7 +34,7 @@ def get_people_keyboard() -> ReplyKeyboardMarkup:
             KeyboardButton(LIST_BIRTHDAYS_BUTTON)
         ],
         [
-            KeyboardButton(BACK_BUTTON)
+            KeyboardButton(MAIN_MENU_BUTTON)
         ]
     ]
     return ReplyKeyboardMarkup(keyboard, resize_keyboard=True, is_persistent=True)
@@ -46,7 +47,7 @@ def get_settings_keyboard() -> ReplyKeyboardMarkup:
             KeyboardButton(TOGGLE_NOTIFICATIONS_BUTTON)
         ],
         [
-            KeyboardButton(BACK_BUTTON)
+            KeyboardButton(MAIN_MENU_BUTTON)
         ]
     ]
     return ReplyKeyboardMarkup(keyboard, resize_keyboard=True, is_persistent=True)

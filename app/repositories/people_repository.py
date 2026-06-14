@@ -1,7 +1,7 @@
 from app.database.connection import get_connection
 
 
-def add_person(
+def create_person(
         user_id: int,
         full_name: str,
         day: int,

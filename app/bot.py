@@ -23,7 +23,9 @@ def main() -> None:
     # settings
     for handler in settings.get_handlers():
         app.add_handler(handler)
-
+    # people
+    for handler in people.get_handlers():
+        app.add_handler(handler)
     app.run_polling()
 
 

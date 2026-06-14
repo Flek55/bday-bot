@@ -1,3 +1,5 @@
+import sqlite3
+
 from app.database.connection import get_connection
 
 
@@ -28,3 +30,13 @@ def toggle_user_status(
                      "SET is_active = ? "
                      "WHERE telegram_user_id = ? ",
                      (is_active, telegram_user_id))
+
+
+def get_user_by_telegram_id(
+        telegram_user_id: int
+) -> sqlite3.Row | None:
+    with get_connection() as conn:
+        return conn.execute("SELECT * "
+                            "FROM users "
+                            "WHERE telegram_user_id = ?",
+                            (telegram_user_id,)).fetchone()

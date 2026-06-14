@@ -13,7 +13,6 @@ def get_handlers() -> list:
         MessageHandler(filters.Text(SETTINGS_BUTTON), settings),
         get_change_time_conversation(),
         MessageHandler(filters.Text(TOGGLE_NOTIFICATIONS_BUTTON), toggle_notifications),
-        MessageHandler(filters.Text(BACK_BUTTON), back),
     ]
 
 
@@ -46,6 +45,7 @@ def get_change_time_conversation() -> ConversationHandler:
             ),
         ],
     )
+
 
 async def start_change_time(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     notification_time = get_user_send_time(update.effective_user.id)
@@ -86,7 +86,3 @@ async def toggle_notifications(update: Update, context: ContextTypes.DEFAULT_TYP
     else:
         await update.effective_message.reply_text("Вы отказались от уведомлений",
                                                   reply_markup=get_settings_keyboard())
-
-
-async def back(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    await update.effective_message.reply_text("Главное меню", reply_markup=get_main_keyboard())
